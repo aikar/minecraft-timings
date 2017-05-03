@@ -1,13 +1,13 @@
 package co.aikar.timings.lib;
 
 
-class EmptyTiming extends CommandTiming {
+class EmptyTiming extends MCTiming {
     EmptyTiming() {
         super();
     }
 
     @Override
-    public final CommandTiming startTiming() {
+    public final MCTiming startTiming() {
         return this;
     }
 

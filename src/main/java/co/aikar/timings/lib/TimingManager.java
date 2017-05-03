@@ -21,12 +21,12 @@ public class TimingManager {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public CommandTiming ofStart(String name) {
+    public MCTiming ofStart(String name) {
         return of(name).startTiming();
     }
 
     @SuppressWarnings("WeakerAccess")
-    public CommandTiming of(String name) {
+    public MCTiming of(String name) {
         if (timingProvider == null) {
             synchronized (LOCK) {
                 if (timingProvider == null) {

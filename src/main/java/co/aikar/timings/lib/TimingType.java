@@ -7,19 +7,19 @@ import java.lang.reflect.InvocationTargetException;
 enum TimingType {
     SPIGOT() {
         @Override
-        CommandTiming newTiming(Plugin plugin, String command) {
+        MCTiming newTiming(Plugin plugin, String command) {
             return new SpigotTiming(command);
         }
     },
     MINECRAFT() {
         @Override
-        CommandTiming newTiming(Plugin plugin, String command) {
+        MCTiming newTiming(Plugin plugin, String command) {
             return new MinecraftTiming(plugin, command);
         }
     },
     MINECRAFT_18() {
         @Override
-        CommandTiming newTiming(Plugin plugin, String command) {
+        MCTiming newTiming(Plugin plugin, String command) {
             try {
                 return new Minecraft18Timing(plugin, command);
             } catch (InvocationTargetException | IllegalAccessException e) {
@@ -29,7 +29,7 @@ enum TimingType {
     },
     EMPTY();
 
-    CommandTiming newTiming(Plugin plugin, String command) {
+    MCTiming newTiming(Plugin plugin, String command) {
         return new EmptyTiming();
     }
 }

@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  *
  * Well I was wrong, so for 1.8 servers, we need to use reflection to get the void return type instead.
  */
-class Minecraft18Timing extends CommandTiming {
+class Minecraft18Timing extends MCTiming {
     private final Object timing;
     private static Method startTiming;
     private static Method stopTiming;
@@ -37,7 +37,7 @@ class Minecraft18Timing extends CommandTiming {
     }
 
     @Override
-    public CommandTiming startTiming() {
+    public MCTiming startTiming() {
         try {
             if (startTiming != null) {
                 startTiming.invoke(timing);

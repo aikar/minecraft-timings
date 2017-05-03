@@ -2,7 +2,7 @@ package co.aikar.timings.lib;
 
 import org.spigotmc.CustomTimingsHandler;
 
-class SpigotTiming extends CommandTiming {
+class SpigotTiming extends MCTiming {
     private final CustomTimingsHandler timing;
 
     SpigotTiming(String name) {
@@ -11,7 +11,7 @@ class SpigotTiming extends CommandTiming {
     }
 
     @Override
-    public CommandTiming startTiming() {
+    public MCTiming startTiming() {
         timing.startTiming();
         return this;
     }

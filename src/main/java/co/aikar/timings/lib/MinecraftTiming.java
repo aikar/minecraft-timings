@@ -4,7 +4,7 @@ import co.aikar.timings.Timing;
 import co.aikar.timings.Timings;
 import org.bukkit.plugin.Plugin;
 
-class MinecraftTiming extends CommandTiming {
+class MinecraftTiming extends MCTiming {
     private final Timing timing;
     MinecraftTiming(Plugin plugin, String name) {
         super();
@@ -12,7 +12,7 @@ class MinecraftTiming extends CommandTiming {
     }
 
     @Override
-    public CommandTiming startTiming() {
+    public MCTiming startTiming() {
         timing.startTiming();
         return this;
     }
