@@ -20,10 +20,11 @@ class Minecraft18Timing extends CommandTiming {
 
     static {
         try {
-            Class<?> clazz = Class.forName("co.aikar.timings.Timing");
-            startTiming = clazz.getDeclaredMethod("startTiming");
-            stopTiming = clazz.getDeclaredMethod("stopTiming");
-            of = clazz.getDeclaredMethod("of", Plugin.class, String.class);
+            Class<?> timing = Class.forName("co.aikar.timings.Timing");
+            Class<?> timings = Class.forName("co.aikar.timings.Timings");
+            startTiming = timing.getDeclaredMethod("startTiming");
+            stopTiming = timing.getDeclaredMethod("stopTiming");
+            of = timings.getDeclaredMethod("of", Plugin.class, String.class);
         } catch (ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
             Bukkit.getLogger().severe("Timings18 failed to initialize correctly. Stuff's going to be broken.");
