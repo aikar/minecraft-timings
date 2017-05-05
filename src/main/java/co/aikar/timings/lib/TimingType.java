@@ -5,7 +5,7 @@ import org.bukkit.plugin.Plugin;
 import java.lang.reflect.InvocationTargetException;
 
 enum TimingType {
-    SPIGOT() {
+    SPIGOT(true) {
         @Override
         MCTiming newTiming(Plugin plugin, String command) {
             return new SpigotTiming(command);
@@ -28,6 +28,19 @@ enum TimingType {
         }
     },
     EMPTY();
+
+    private final boolean useCache;
+
+    public boolean useCache() {
+        return useCache;
+    }
+
+    TimingType() {
+        this(false);
+    }
+    TimingType(boolean useCache) {
+        this.useCache = useCache;
+    }
 
     MCTiming newTiming(Plugin plugin, String command) {
         return new EmptyTiming();

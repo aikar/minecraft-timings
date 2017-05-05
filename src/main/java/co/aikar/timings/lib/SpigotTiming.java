@@ -1,5 +1,6 @@
 package co.aikar.timings.lib;
 
+import org.bukkit.Bukkit;
 import org.spigotmc.CustomTimingsHandler;
 
 class SpigotTiming extends MCTiming {
@@ -12,12 +13,16 @@ class SpigotTiming extends MCTiming {
 
     @Override
     public MCTiming startTiming() {
-        timing.startTiming();
+        if (Bukkit.isPrimaryThread()) {
+            timing.startTiming();
+        }
         return this;
     }
 
     @Override
     public void stopTiming() {
-        timing.stopTiming();
+        if (Bukkit.isPrimaryThread()) {
+            timing.stopTiming();
+        }
     }
 }

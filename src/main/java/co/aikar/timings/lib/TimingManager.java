@@ -2,6 +2,8 @@ package co.aikar.timings.lib;
 
 import org.bukkit.plugin.Plugin;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class TimingManager {
@@ -10,6 +12,7 @@ public class TimingManager {
     private static final Object LOCK = new Object();
 
     private final Plugin plugin;
+    private final Map<String, MCTiming> timingCache = new HashMap<>(0);
 
     private TimingManager(Plugin plugin) {
         this.plugin = plugin;
@@ -48,6 +51,19 @@ public class TimingManager {
                     }
                 }
             }
+        }
+
+        MCTiming timing;
+        if (timingProvider.useCache()) {
+            synchronized (timingCache) {
+                String lowerKey = name.toLowerCase();
+                timing = timingCache.get(lowerKey);
+                if (timing == null) {
+                    timing = timingProvider.newTiming(plugin, name);
+                    timingCache.put(lowerKey, timing);
+                }
+            }
+            return timing;
         }
 
         return timingProvider.newTiming(plugin, name);
