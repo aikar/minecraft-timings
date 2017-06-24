@@ -22,18 +22,18 @@ class Minecraft18Timing extends MCTiming {
         try {
             Class<?> timing = Class.forName("co.aikar.timings.Timing");
             Class<?> timings = Class.forName("co.aikar.timings.Timings");
-            startTiming = timing.getDeclaredMethod("startTiming");
-            stopTiming = timing.getDeclaredMethod("stopTiming");
-            of = timings.getDeclaredMethod("of", Plugin.class, String.class);
+            startTiming = timing.getDeclaredMethod("startTimingIfSync");
+            stopTiming = timing.getDeclaredMethod("stopTimingIfSync");
+            of = timings.getDeclaredMethod("of", Plugin.class, String.class, timing);
         } catch (ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
             Bukkit.getLogger().severe("Timings18 failed to initialize correctly. Stuff's going to be broken.");
         }
     }
 
-    Minecraft18Timing(Plugin plugin, String name) throws InvocationTargetException, IllegalAccessException {
+    Minecraft18Timing(Plugin plugin, String name, MCTiming parent) throws InvocationTargetException, IllegalAccessException {
         super();
-        this.timing = of.invoke(null, plugin, name);
+        this.timing = of.invoke(null, plugin, name, parent instanceof Minecraft18Timing ? ((Minecraft18Timing) parent).timing : null);
     }
 
     @Override

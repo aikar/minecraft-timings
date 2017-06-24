@@ -25,11 +25,21 @@ public class TimingManager {
 
     @SuppressWarnings("WeakerAccess")
     public MCTiming ofStart(String name) {
-        return of(name).startTiming();
+        return ofStart(name, null);
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public MCTiming ofStart(String name, MCTiming parent) {
+        return of(name, parent).startTiming();
     }
 
     @SuppressWarnings("WeakerAccess")
     public MCTiming of(String name) {
+        return of(name, null);
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public MCTiming of(String name, MCTiming parent) {
         if (timingProvider == null) {
             synchronized (LOCK) {
                 if (timingProvider == null) {
@@ -59,13 +69,13 @@ public class TimingManager {
                 String lowerKey = name.toLowerCase();
                 timing = timingCache.get(lowerKey);
                 if (timing == null) {
-                    timing = timingProvider.newTiming(plugin, name);
+                    timing = timingProvider.newTiming(plugin, name, parent);
                     timingCache.put(lowerKey, timing);
                 }
             }
             return timing;
         }
 
-        return timingProvider.newTiming(plugin, name);
+        return timingProvider.newTiming(plugin, name, parent);
     }
 }
