@@ -51,8 +51,12 @@ Simply add my maven repo to your plugin and add v1.0.2 as a dependency, and shad
                 <version>2.4.1</version>
                 <configuration>
                     <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
-<relocations>
-                </relocations>
+                    <relocations>
+                        <relocation>
+                            <pattern>co.aikar.timings.lib</pattern>
+                            <shadedPattern>[YOUR PLUGIN PACKAGE].timingslib</shadedPattern>
+                        </relocation>
+                    </relocations>
                 </configuration>
                 <executions>
                     <execution>
@@ -82,13 +86,22 @@ buildscript {
 }
 
 apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'java'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
-    maven { url = "http://ci.emc.gs/nexus/content/groups/aikar/" }
+    maven { url = "http://repo.aikar.co/nexus/content/groups/aikar/" }
     maven { url = "https://hub.spigotmc.org/nexus/content/groups/public/" }
 }
+
 dependencies {
     compile "co.aikar:minecraft-timings:1.0.4"
+}
+
+shadowJar {
+   relocate 'co.aikar.timings.lib', '[YOUR PLUGIN PACKAGE].timingslib'
 }
 
 ```
