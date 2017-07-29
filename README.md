@@ -29,7 +29,7 @@ Simply add my maven repo to your plugin and add v1.0.2 as a dependency, and shad
     <repositories>
         <repository>
             <id>aikar</id>
-            <url>http://ci.emc.gs/nexus/content/groups/aikar/</url>
+            <url>http://repo.aikar.co/nexus/content/groups/aikar/</url>
         </repository>
     </repositories>
     
@@ -38,7 +38,7 @@ Simply add my maven repo to your plugin and add v1.0.2 as a dependency, and shad
         <dependency>
             <groupId>co.aikar</groupId>
             <artifactId>minecraft-timings</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.4</version>
         </dependency>
     </dependencies>
     
@@ -88,7 +88,7 @@ repositories {
     maven { url = "https://hub.spigotmc.org/nexus/content/groups/public/" }
 }
 dependencies {
-    compile "co.aikar:minecraft-timings:1.0.2"
+    compile "co.aikar:minecraft-timings:1.0.4"
 }
 
 ```
