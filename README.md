@@ -109,7 +109,7 @@ shadowJar {
 ### Code
 In your plugin
 ```java
-private static final TimingManager timingManager;
+private static TimingManager timingManager;
 public void onEnable() {
     timingManager = TimingManager.of(this);
 }
